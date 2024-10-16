@@ -47,8 +47,8 @@ int main()
 	merchantInventory.push_back("helmet = $150");
 
 
-	cout << "Hello stranger, welcome to my shop!" << endl;
-	cout << "What is your name?" << endl;
+	cout << "Hello stranger, welcome to my shop!\n" << endl;
+	cout << "What is your name?\n" << endl;
 	cin >> playerName;
 	
 	cout << "\nNice to meet you " << playerName << "\n" << endl;
@@ -68,10 +68,11 @@ int main()
 				itemPrice = 50;
 				if (playerWallet >= itemPrice && !soldOut)
 				{
-					cout << "You purchased a dagger" << endl;
+					cout << "You purchased a dagger\n" << endl;
 					merchantInventory.erase(merchantInventory.begin());
 					merchantInventory.insert(merchantInventory.begin(), "Sold Out");
 					playerWallet -= itemPrice;
+					merchantWallet += itemPrice;
 					playerInventory.push_back("dagger = $ 30");
 					soldOut = true;
 				}
@@ -83,9 +84,69 @@ int main()
 				{
 					cout << "Insufficient funds" << endl;
 				}
+				break;
+			case 2:
+				itemPrice = 50;
+				if (playerWallet >= itemPrice && !soldOut)
+				{
+					cout << "You purchased a dagger\n" << endl;
+					merchantInventory.erase(merchantInventory.begin() + 1);
+					merchantInventory.insert(merchantInventory.begin() + 1, "Sold Out");
+					playerWallet -= itemPrice;
+					merchantWallet += itemPrice;
+					playerInventory.push_back("dagger = $ 30");
+					soldOut = true;
+				}
+				else if (soldOut)
+				{
+					cout << "Sorry sold out" << endl;
+				}
+				else
+				{
+					cout << "Insufficient funds" << endl;
+				}
+				break;
+			case 3:
+				itemPrice = 50;
+				if (playerWallet >= itemPrice && !soldOut)
+				{
+					cout << "You purchased a dagger\n" << endl;
+					merchantInventory.erase(merchantInventory.begin() + 2);
+					merchantInventory.insert(merchantInventory.begin() + 2, "Sold Out");
+					playerWallet -= itemPrice;
+					merchantWallet += itemPrice;
+					playerInventory.push_back("dagger = $ 30");
+					soldOut = true;
+				}
+				else if (soldOut)
+				{
+					cout << "Sorry sold out" << endl;
+				}
+				else
+				{
+					cout << "Insufficient funds" << endl;
+				}
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			default:
+				cout << "\nInvalid number, Please try again\n" << endl;
+			}
+		}
+
+		if (response == 's')
+		{
+			GetPlayerInventory();
+
+			switch (PlayerInput(5, 1))
+			{
+			case 1:
 
 				break;
 			case 2:
+
 				break;
 			case 3:
 				break;
@@ -94,13 +155,8 @@ int main()
 			case 5:
 				break;
 			default:
-				cout << "Invalid number, Please try again" << endl;
+				cout << "\nInvalid number, Please try again\n" << endl;
 			}
-		}
-
-		if (response == 's')
-		{
-			GetPlayerInventory();
 		}
 	} while (response != 'l');
 }
@@ -118,7 +174,7 @@ int PlayerInput(int high, int low)
 	int number;
 	do
 	{
-		cout << "Select an item from: " << high << " - " << low << endl;
+		cout << "\nSelect an item from: \n" << low << " - " << high << endl;
 		cin >> number;
 	} while (number > high || number < low);
 
@@ -127,8 +183,8 @@ int PlayerInput(int high, int low)
 
 void ShopMenu()
 {
-	cout << "What can I do for you today? " << endl;
-	cout << "[b]uy [s]ell [l]eave" << endl;
+	cout << "\nWhat can I do for you today?\n " << endl;
+	cout << "[b]uy [s]ell [l]eave\n" << endl;
 	cin >> response;	
 }
 

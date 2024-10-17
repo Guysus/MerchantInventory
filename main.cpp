@@ -76,7 +76,7 @@ int main()
 					playerInventory.push_back("dagger = $ 30");
 					soldOut = true;
 				}
-				else if (soldOut)
+				else if (playerWallet >= itemPrice && soldOut)
 				{
 					cout << "Sorry sold out" << endl;
 				}
@@ -128,8 +128,46 @@ int main()
 				}
 				break;
 			case 4:
+				itemPrice = 200;
+				if (playerWallet >= itemPrice && !soldOut)
+				{
+					cout << "You purchased a sword\n" << endl;
+					merchantInventory.erase(merchantInventory.begin() + 3);
+					merchantInventory.insert(merchantInventory.begin() + 3, "Sold Out");
+					playerWallet -= itemPrice;
+					merchantWallet += itemPrice;
+					playerInventory.push_back("sword = $ 160");
+					soldOut = true;
+				}
+				else if (soldOut)
+				{
+					cout << "Sorry sold out" << endl;
+				}
+				else
+				{
+					cout << "Insufficient funds" << endl;
+				}
 				break;
 			case 5:
+				itemPrice = 150;
+				if (playerWallet >= itemPrice && !soldOut)
+				{
+					cout << "You purchased a helmet\n" << endl;
+					merchantInventory.erase(merchantInventory.begin() + 3);
+					merchantInventory.insert(merchantInventory.begin() + 3, "Sold Out");
+					playerWallet -= itemPrice;
+					merchantWallet += itemPrice;
+					playerInventory.push_back("helmet = $ 100");
+					soldOut = true;
+				}
+				else if (playerWallet >= itemPrice && soldOut)
+				{
+					cout << "Sorry sold out" << endl;
+				}
+				else
+				{
+					cout << "Insufficient funds" << endl;
+				}
 				break;
 			default:
 				cout << "\nInvalid number, Please try again\n" << endl;
@@ -163,6 +201,8 @@ int main()
 
 void GetMerchantInventory()
 {
+	cout << "These are the items I have for sale\n";
+
 	for (iter = merchantInventory.begin(); iter != merchantInventory.end(); ++iter)
 	{
 		cout << *iter << endl;

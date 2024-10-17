@@ -88,7 +88,7 @@ int main()
 					merchantInventory.insert(merchantInventory.begin(), "Sold Out");
 					playerWallet -= itemPrice;
 					merchantWallet += itemPrice;
-					playerInventory.push_back("dagger = $ 30");
+					playerInventory.emplace_back("dagger = $ 30");
 					daggerOneSoldOut = true;
 				}				
 				break;
@@ -176,7 +176,7 @@ int main()
 					merchantInventory.insert(merchantInventory.begin() + 3, "Sold Out");
 					playerWallet -= itemPrice;
 					merchantWallet += itemPrice;
-					playerInventory.push_back("helmet = $ 100");
+					playerInventory.push_back("helmet = $100");
 					helmetSoldOut = true;
 				}
 				break;
@@ -260,14 +260,14 @@ void SellPlayerItem()
 			playerWallet += itemPrice;
 			playerInventory[i].erase();
 		}
-		if (playerInventory[i] == "dagger = $30")
+		else if (playerInventory[i] == "dagger = $ 30")
 		{
 			cout << "\nYou sold your dagger\n";
 			itemPrice = 30;
 			playerWallet += itemPrice;
 			playerInventory[i].erase();
 		}
-		if (playerInventory[i] == "helmet = $100")
+		else if (playerInventory[i] == "helmet = $100")
 		{
 			cout << "\nYou sold your helmet\n";
 			itemPrice = 100;

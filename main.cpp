@@ -20,9 +20,13 @@ using std::string;
 
 int itemPrice = 0;
 char response = ' ';
-bool soldOut = false;
 int playerWallet = 200;
 int merchantWallet = 300;
+bool swordSoldOut = false;
+bool helmetSoldOut = false;
+bool daggerOneSoldOut = false;
+bool daggerTwoSoldOut = false;
+bool daggerThreeSoldOut = false;
 
 string itemName = "";
 string playerName = "";
@@ -33,6 +37,7 @@ vector<string>::iterator myIterator;
 vector<string>::const_iterator iter;
 
 void ShopMenu();
+void SellPlayerItem();
 void DisplayWallets();
 void GetPlayerInventory();
 void GetMerchantInventory();
@@ -76,7 +81,7 @@ int main()
 				{
 					cout << "\nInsufficient funds\n" << endl;
 				}
-				if (playerWallet >= itemPrice)
+				if (playerWallet >= itemPrice && !daggerOneSoldOut)
 				{
 					cout << "You purchased a dagger\n" << endl;
 					merchantInventory.erase(merchantInventory.begin());
@@ -84,7 +89,8 @@ int main()
 					playerWallet -= itemPrice;
 					merchantWallet += itemPrice;
 					playerInventory.push_back("dagger = $ 30");
-				}
+					daggerOneSoldOut = true;
+				}				
 				break;
 			case 2:
 				itemPrice = 50;
@@ -97,14 +103,15 @@ int main()
 				{
 					cout << "\nInsufficient funds\n" << endl;
 				}
-				if (playerWallet >= itemPrice)
+				if (playerWallet >= itemPrice && !daggerTwoSoldOut)
 				{
 					cout << "You purchased a dagger\n" << endl;
 					merchantInventory.erase(merchantInventory.begin() + 1);
 					merchantInventory.insert(merchantInventory.begin() + 1, "Sold Out");
 					playerWallet -= itemPrice;
 					merchantWallet += itemPrice;
-					playerInventory.push_back("dagger = $ 30");					
+					playerInventory.push_back("dagger = $ 30");	
+					daggerTwoSoldOut = true;
 				}
 				break;
 			case 3:
@@ -118,7 +125,7 @@ int main()
 				{
 					cout << "\nInsufficient funds\n" << endl;
 				}
-				if (playerWallet >= itemPrice)
+				if (playerWallet >= itemPrice && !daggerThreeSoldOut)
 				{
 					cout << "You purchased a dagger\n" << endl;
 					merchantInventory.erase(merchantInventory.begin() + 2);
@@ -126,6 +133,7 @@ int main()
 					playerWallet -= itemPrice;
 					merchantWallet += itemPrice;
 					playerInventory.push_back("dagger = $ 30");
+					daggerThreeSoldOut = true;
 				}
 				break;
 			case 4:
@@ -139,7 +147,7 @@ int main()
 				{
 					cout << "\nInsufficient funds\n" << endl;
 				}
-				if (playerWallet >= itemPrice)
+				if (playerWallet >= itemPrice && !swordSoldOut)
 				{
 					cout << "You purchased a sword\n" << endl;
 					merchantInventory.erase(merchantInventory.begin() + 3);
@@ -147,6 +155,7 @@ int main()
 					playerWallet -= itemPrice;
 					merchantWallet += itemPrice;
 					playerInventory.push_back("sword = $ 160");
+					swordSoldOut = true;
 				}
 				break;
 			case 5:
@@ -160,7 +169,7 @@ int main()
 				{
 					cout << "\nInsufficient funds\n" << endl;
 				}
-				if (playerWallet >= itemPrice)
+				if (playerWallet >= itemPrice && !helmetSoldOut)
 				{
 					cout << "You purchased a helmet\n" << endl;
 					merchantInventory.erase(merchantInventory.begin() + 3);
@@ -168,6 +177,7 @@ int main()
 					playerWallet -= itemPrice;
 					merchantWallet += itemPrice;
 					playerInventory.push_back("helmet = $ 100");
+					helmetSoldOut = true;
 				}
 				break;
 			default:
@@ -179,28 +189,28 @@ int main()
 		{
 			GetPlayerInventory();
 
-			for (int i = 0; i < playerInventory.size(); ++i)
-			{
+			
 
-			}
-
-			/*switch (PlayerInput(5, 1))
+			switch (PlayerInput(5, 1))
 			{
 			case 1:
-				itemPrice = 150;
+				SellPlayerItem();
 				break;
 			case 2:
-
+				SellPlayerItem();
 				break;
 			case 3:
+				SellPlayerItem();
 				break;
 			case 4:
+				SellPlayerItem();
 				break;
 			case 5:
+				SellPlayerItem();
 				break;
 			default:
 				cout << "\nInvalid number, Please try again\n" << endl;
-			}*/
+			}
 		}
 	} while (response != 'l');
 }
@@ -239,9 +249,37 @@ void ShopMenu()
 	cin >> response;	
 }
 
+void SellPlayerItem()
+{
+	for (int i = 0; i < playerInventory.size(); ++i)
+	{
+		if (playerInventory[i] == "sword = $150")
+		{
+			cout << "\nYou sold your sword\n";
+			itemPrice = 150;
+			playerWallet += itemPrice;
+			playerInventory[i].erase();
+		}
+		if (playerInventory[i] == "dagger = $30")
+		{
+			cout << "\nYou sold your dagger\n";
+			itemPrice = 30;
+			playerWallet += itemPrice;
+			playerInventory[i].erase();
+		}
+		if (playerInventory[i] == "helmet = $100")
+		{
+			cout << "\nYou sold your helmet\n";
+			itemPrice = 100;
+			playerWallet += itemPrice;
+			playerInventory[i].erase();
+		}
+	}
+}
+
 void DisplayWallets()
 {
-	cout << "Merchant wallet: $" << merchantWallet << endl;
+	cout << "\nMerchant wallet: $" << merchantWallet << endl;
 	cout << "Player wallet: $" << playerWallet << "\n" << endl;
 }
 

@@ -179,7 +179,12 @@ int main()
 		{
 			GetPlayerInventory();
 
-			switch (PlayerInput(5, 1))
+			for (int i = 0; i < playerInventory.size(); ++i)
+			{
+
+			}
+
+			/*switch (PlayerInput(5, 1))
 			{
 			case 1:
 				itemPrice = 150;
@@ -195,7 +200,7 @@ int main()
 				break;
 			default:
 				cout << "\nInvalid number, Please try again\n" << endl;
-			}
+			}*/
 		}
 	} while (response != 'l');
 }

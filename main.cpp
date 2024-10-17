@@ -52,7 +52,6 @@ int main()
 	merchantInventory.push_back("sword = $200");
 	merchantInventory.push_back("helmet = $150");
 
-
 	cout << "Hello stranger, welcome to my shop!\n" << endl;
 	cout << "What is your name?\n" << endl;
 	cin >> playerName;

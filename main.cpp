@@ -258,6 +258,7 @@ void SellPlayerItem()
 			itemPrice = 150;
 			playerWallet += itemPrice;
 			playerInventory[i].erase();
+			break;
 		}
 		else if (playerInventory[i] == "dagger = $ 30")
 		{
@@ -265,6 +266,7 @@ void SellPlayerItem()
 			itemPrice = 30;
 			playerWallet += itemPrice;
 			playerInventory[i].erase();
+			break;
 		}
 		else if (playerInventory[i] == "helmet = $100")
 		{
@@ -272,6 +274,11 @@ void SellPlayerItem()
 			itemPrice = 100;
 			playerWallet += itemPrice;
 			playerInventory[i].erase();
+			break;
+		}
+		else
+		{
+			cout << "\nNothing for sale\n";
 		}
 	}
 }
@@ -284,6 +291,7 @@ void DisplayWallets()
 
 void GetPlayerInventory()
 {
+	cout << "\n" << playerName << ",\n";
 	cout << "\nThese are your current items: \n" << endl;
 
 	for (iter = playerInventory.begin(); iter != playerInventory.end(); ++iter)
